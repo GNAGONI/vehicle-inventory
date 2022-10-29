@@ -1,0 +1,40 @@
+FROM node:16-alpine AS builder
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+RUN npm run build
+
+# In code above we have build typescript project to javascript in a folder dist
+
+
+
+FROM node:16-alpine AS server
+
+WORKDIR /usr/src/app
+
+COPY package* ./
+
+# install only production dependencies (dev dependencies are not required)
+# so build will be optimized from memory side
+RUN npm install --production
+
+# copy dist folder from builder instance to local instance
+# dist folder with production modules are the only required
+# parts of the system to run it in production
+COPY --from=builder ./usr/src/app/dist ./dist
+
+
+CMD [ "npm", "start" ]
