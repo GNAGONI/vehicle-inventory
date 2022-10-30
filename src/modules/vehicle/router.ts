@@ -9,5 +9,6 @@ router.get('/', validation.checkLimit, validation.checkOffset, validate, control
 router.get('/:id', validation.checkVehicleId, validate, controller.getVehicleById);
 router.post('/', validation.checkVehicleName, validate, controller.createVehicle);
 router.patch('/:id', validation.checkVehicleId, validation.checkVehicleName, validate, controller.updateVehicle);
+router.delete('/:id', validation.checkVehicleId, validate, controller.deleteVehicle);
 
 export default router;

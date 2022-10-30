@@ -33,4 +33,13 @@ const updateVehicle = async (vehicleId: string, data: Partial<VehicleData>): Pro
   return updatedVehicle;
 };
 
-export default { findVehicleById, findVehicles, createVehicle, updateVehicle };
+const deleteVehicle = async (vehicleId: string): Promise<number> => {
+  const count = await Vehicle.destroy({
+    where: {
+      id: vehicleId,
+    },
+  });
+  return count;
+};
+
+export default { findVehicleById, findVehicles, createVehicle, updateVehicle, deleteVehicle };

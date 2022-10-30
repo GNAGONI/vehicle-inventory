@@ -32,4 +32,10 @@ const updateVehicle = async (req: Request, res: Response) => {
   res.json(vehicle);
 };
 
-export default { getVehicleById, getVehicles, createVehicle, updateVehicle };
+const deleteVehicle = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const count = await service.deleteVehicle(id);
+  res.status(RESPONSE_STATUS.OK).json({ count });
+};
+
+export default { getVehicleById, getVehicles, createVehicle, updateVehicle, deleteVehicle };
