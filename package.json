@@ -2,7 +2,7 @@
   "name": "vehicle-inventory",
   "version": "1.0.0",
   "description": "Vehicle inventory server",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node .",
