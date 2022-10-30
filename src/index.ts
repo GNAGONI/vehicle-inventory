@@ -1,13 +1,15 @@
-import express from 'express';
+import app from './app';
 import dotenv from 'dotenv';
 
 dotenv.config();
+init();
 
-const app = express();
-const port = process.env.PORT || 5000;
-
-app.get('/', (_, res) => {
-  res.status(200).send('Hello main branch');
-});
-
-app.listen(port, () => console.log(`Running on port ${port}`));
+async function init() {
+  try {
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => console.log(`Running on port ${port}`));
+  } catch (error) {
+    console.error(`An error occurred: ${JSON.stringify(error)}`);
+    process.exit(1);
+  }
+}
