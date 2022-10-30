@@ -1,3 +1,4 @@
-import vehicleRouter from './router';
+import router from './router';
+import { Vehicle } from './model';
 
-export { vehicleRouter };
+export default { router, Vehicle };

@@ -1,11 +1,13 @@
 import express from 'express';
 import { validate } from '../../middlewares';
-import vehicleController from './controller';
-import { checkVehicleId } from './validation';
+import controller from './controller';
+import validation from './validation';
 
-const vehicleRouter = express.Router();
+const router = express.Router();
 
-vehicleRouter.get('/:id', checkVehicleId, validate, vehicleController.getVehicleById);
-vehicleRouter.get('/', vehicleController.getVehicles);
+router.get('/', controller.getVehicles);
+router.get('/:id', validation.checkVehicleId, validate, controller.getVehicleById);
+router.post('/', validation.checkVehicleName, validate, controller.createVehicle);
+router.patch('/:id', validation.checkVehicleId, validation.checkVehicleName, validate, controller.updateVehicle);
 
-export default vehicleRouter;
+export default router;

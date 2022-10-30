@@ -1,19 +1,34 @@
 import { Request, Response } from 'express';
-import { Vehicle } from './model';
+import service from './service';
+import { VehicleData } from './types';
 import { RESPONSE_STATUS } from '../../types';
 
 const getVehicleById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const vehicle = await Vehicle.findOne({
-    where: { id },
-  });
+  const vehicle = await service.findVehicleById(id);
   if (!vehicle) return res.status(RESPONSE_STATUS.NOT_FOUND).end();
   res.json(vehicle);
 };
 
 const getVehicles = async (req: Request, res: Response) => {
-  const contracts = await Vehicle.findAll();
-  res.json(contracts);
+  const vehicles = await service.findVehicles();
+  if (!vehicles) return res.status(RESPONSE_STATUS.NOT_FOUND).end();
+  res.json(vehicles);
 };
 
-export default { getVehicleById, getVehicles };
+const createVehicle = async (req: Request, res: Response) => {
+  const data: VehicleData = req.body;
+  const vehicle = await service.createVehicle(data);
+  if (!vehicle) return res.status(RESPONSE_STATUS.NOT_FOUND).end();
+  res.json(vehicle);
+};
+
+const updateVehicle = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data: Partial<VehicleData> = req.body;
+  const vehicle = await service.updateVehicle(id, data);
+  if (!vehicle) return res.status(RESPONSE_STATUS.NOT_FOUND).end();
+  res.json(vehicle);
+};
+
+export default { getVehicleById, getVehicles, createVehicle, updateVehicle };

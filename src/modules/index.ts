@@ -1,3 +1,3 @@
-import { vehicleRouter } from './vehicle';
+import vehicle from './vehicle';
 
-export { vehicleRouter };
+export { vehicle };

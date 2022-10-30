@@ -1,8 +1,8 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, CreationOptional } from 'sequelize';
 import { sequelize } from '../../model';
 
 class Vehicle extends Model {
-  declare id?: string;
+  declare id?: CreationOptional<string>;
   declare vehicleName: string;
 }
 

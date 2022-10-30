@@ -1,4 +1,6 @@
-import { Vehicle } from '../src/model';
+import vehicle from '../src/modules/vehicle';
+
+const { Vehicle } = vehicle;
 
 seed();
 
