@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJs",
     "esModuleInterop": true,
     "target": "es6",
     "noImplicitAny": true,
@@ -12,6 +12,6 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "scripts/**/*"],
   "exclude": ["dist"]
 }
