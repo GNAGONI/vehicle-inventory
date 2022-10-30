@@ -11,7 +11,8 @@ const getVehicleById = async (req: Request, res: Response) => {
 };
 
 const getVehicles = async (req: Request, res: Response) => {
-  const vehicles = await service.findVehicles();
+  const { limit, offset } = req.query;
+  const vehicles = await service.findVehicles(Number(limit), Number(offset));
   if (!vehicles) return res.status(RESPONSE_STATUS.NOT_FOUND).end();
   res.json(vehicles);
 };

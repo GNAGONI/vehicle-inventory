@@ -4,12 +4,17 @@ import { VehicleData } from './types';
 const findVehicleById = async (vehicleId: string): Promise<Vehicle> => {
   const vehicle = await Vehicle.findOne({
     where: { id: vehicleId },
+    limit: 1,
+    offset: 0,
   });
   return vehicle;
 };
 
-const findVehicles = async (): Promise<Vehicle[]> => {
-  const vehicles = await Vehicle.findAll();
+const findVehicles = async (limit: number, offset: number): Promise<Vehicle[]> => {
+  const vehicles = await Vehicle.findAll({
+    limit,
+    offset,
+  });
   return vehicles;
 };
 
